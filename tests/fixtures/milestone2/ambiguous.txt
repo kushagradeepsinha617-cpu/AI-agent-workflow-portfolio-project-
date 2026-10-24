@@ -1,0 +1,1 @@
+Invoice SYN-101 from Demo Supplies. It was issued on 03/04/2026; due on October 31, 2026. The currency is USD. Subtotal is 100.00; tax is 5.00; total is 105.00. This invoice is covering synthetic office supplies.

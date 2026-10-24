@@ -1,0 +1,16 @@
+{
+  "status": "completed",
+  "output": [
+    {
+      "type": "message",
+      "role": "assistant",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\"fields\": {\"vendor_name\": null, \"invoice_number\": null, \"invoice_date\": \"October 1, 2026\", \"due_date\": \"October 31, 2026\", \"currency\": \"USD\", \"subtotal\": \"100.00\", \"tax\": \"5.00\", \"total\": \"105.00\", \"description\": \"synthetic office supplies\"}, \"uncertain_fields\": [], \"evidence\": {\"vendor_name\": [], \"invoice_number\": [], \"invoice_date\": [{\"source\": \"document\", \"line\": 1, \"value\": \"October 1, 2026\"}], \"due_date\": [{\"source\": \"document\", \"line\": 1, \"value\": \"October 31, 2026\"}], \"currency\": [{\"source\": \"document\", \"line\": 1, \"value\": \"USD\"}], \"subtotal\": [{\"source\": \"document\", \"line\": 1, \"value\": \"100.00\"}], \"tax\": [{\"source\": \"document\", \"line\": 1, \"value\": \"5.00\"}], \"total\": [{\"source\": \"document\", \"line\": 1, \"value\": \"105.00\"}], \"description\": [{\"source\": \"document\", \"line\": 1, \"value\": \"synthetic office supplies\"}]}}"
+        }
+      ]
+    }
+  ]
+}

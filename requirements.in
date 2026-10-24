@@ -1,0 +1,2 @@
+# CrewAI includes its own dependencies; no optional tools/provider extras needed.
+crewai==1.15.30

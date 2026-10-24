@@ -1,0 +1,3 @@
+Hello, please review this synthetic invoice.
+Invoice number: DEMO-002
+Total: 115.00

@@ -1,0 +1,798 @@
+{
+  "schema_version": 1,
+  "dataset_id": "synthetic-invoices-v1",
+  "dataset_sha256": "7c303abda9d27fb8b6f960f9e8a161f3fa10fa930812c739e32bf0b28ab1a28e",
+  "system_under_test": {
+    "extraction": "deterministic_mock",
+    "orchestration": "real_crewai",
+    "review_model": "offline_stub",
+    "live_model_evaluation": false,
+    "crewai_version": "1.15.30"
+  },
+  "case_count": 17,
+  "execution_failures": 0,
+  "known_field_accuracy": {
+    "correct": 131,
+    "total": 140,
+    "accuracy": 0.9357142857142857
+  },
+  "per_field_accuracy": {
+    "vendor_name": {
+      "correct": 15,
+      "total": 16,
+      "accuracy": 0.9375
+    },
+    "invoice_number": {
+      "correct": 14,
+      "total": 15,
+      "accuracy": 0.9333333333333333
+    },
+    "invoice_date": {
+      "correct": 14,
+      "total": 15,
+      "accuracy": 0.9333333333333333
+    },
+    "due_date": {
+      "correct": 14,
+      "total": 15,
+      "accuracy": 0.9333333333333333
+    },
+    "currency": {
+      "correct": 15,
+      "total": 16,
+      "accuracy": 0.9375
+    },
+    "subtotal": {
+      "correct": 15,
+      "total": 16,
+      "accuracy": 0.9375
+    },
+    "tax": {
+      "correct": 15,
+      "total": 16,
+      "accuracy": 0.9375
+    },
+    "total": {
+      "correct": 14,
+      "total": 15,
+      "accuracy": 0.9333333333333333
+    },
+    "description": {
+      "correct": 15,
+      "total": 16,
+      "accuracy": 0.9375
+    }
+  },
+  "unresolved_detection": {
+    "true_positive": 13,
+    "false_positive": 9,
+    "false_negative": 0,
+    "true_negative": 131,
+    "precision": 0.5909090909090909,
+    "recall": 1.0,
+    "false_positive_rate": 0.06428571428571428,
+    "false_negative_rate": 0.0
+  },
+  "pipeline_outcome_match": {
+    "correct": 16,
+    "total": 17
+  },
+  "quality_passed_cases": 16,
+  "integrity_passed_cases": 17,
+  "cases": [
+    {
+      "id": "valid_labelled",
+      "known_limitation": false,
+      "known_field_count": 9,
+      "correct_field_count": 9,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 9
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "extracted",
+        "validation_status": "valid",
+        "validation_errors": [],
+        "attention_required": false,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "valid_supported_prose",
+      "known_limitation": false,
+      "known_field_count": 9,
+      "correct_field_count": 9,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 9
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "extracted",
+        "validation_status": "valid",
+        "validation_errors": [],
+        "attention_required": false,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "missing_invoice_number",
+      "known_limitation": false,
+      "known_field_count": 8,
+      "correct_field_count": 8,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 8
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "needs_review",
+        "validation_status": "invalid",
+        "validation_errors": [
+          "missing:invoice_number"
+        ],
+        "attention_required": true,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "missing_due_date",
+      "known_limitation": false,
+      "known_field_count": 8,
+      "correct_field_count": 8,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 8
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "needs_review",
+        "validation_status": "invalid",
+        "validation_errors": [
+          "missing:due_date"
+        ],
+        "attention_required": true,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "ambiguous_date",
+      "known_limitation": false,
+      "known_field_count": 8,
+      "correct_field_count": 8,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 8
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "needs_review",
+        "validation_status": "invalid",
+        "validation_errors": [
+          "missing:invoice_date"
+        ],
+        "attention_required": true,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "conflicting_total",
+      "known_limitation": false,
+      "known_field_count": 8,
+      "correct_field_count": 8,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 8
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "needs_review",
+        "validation_status": "invalid",
+        "validation_errors": [
+          "missing:total"
+        ],
+        "attention_required": true,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "incorrect_total",
+      "known_limitation": false,
+      "known_field_count": 9,
+      "correct_field_count": 9,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 9
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "extracted",
+        "validation_status": "invalid",
+        "validation_errors": [
+          "inconsistent_total"
+        ],
+        "attention_required": true,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "invalid_calendar_date",
+      "known_limitation": false,
+      "known_field_count": 9,
+      "correct_field_count": 9,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 9
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "extracted",
+        "validation_status": "invalid",
+        "validation_errors": [
+          "invalid:invoice_date"
+        ],
+        "attention_required": true,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "unknown_vendor",
+      "known_limitation": false,
+      "known_field_count": 9,
+      "correct_field_count": 9,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 9
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "extracted",
+        "validation_status": "valid",
+        "validation_errors": [],
+        "attention_required": true,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "duplicate_first",
+      "known_limitation": false,
+      "known_field_count": 9,
+      "correct_field_count": 9,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 9
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "extracted",
+        "validation_status": "valid",
+        "validation_errors": [],
+        "attention_required": false,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "duplicate_repeat",
+      "known_limitation": false,
+      "known_field_count": 9,
+      "correct_field_count": 9,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 9
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "extracted",
+        "validation_status": "invalid",
+        "validation_errors": [
+          "duplicate_invoice"
+        ],
+        "attention_required": true,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "unreadable",
+      "known_limitation": false,
+      "known_field_count": 0,
+      "correct_field_count": 0,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 9,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 0
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "needs_review",
+        "validation_status": "invalid",
+        "validation_errors": [
+          "missing:vendor_name",
+          "missing:invoice_number",
+          "missing:currency",
+          "missing:description",
+          "missing:invoice_date",
+          "missing:due_date",
+          "missing:subtotal",
+          "missing:tax",
+          "missing:total"
+        ],
+        "attention_required": true,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "unsupported_prose",
+      "known_limitation": true,
+      "known_field_count": 9,
+      "correct_field_count": 0,
+      "field_mismatches": [
+        {
+          "field": "vendor_name",
+          "expected": "Demo Supplies",
+          "actual": null
+        },
+        {
+          "field": "invoice_number",
+          "expected": "EVAL-001",
+          "actual": null
+        },
+        {
+          "field": "invoice_date",
+          "expected": "2026-10-01",
+          "actual": null
+        },
+        {
+          "field": "due_date",
+          "expected": "2026-10-31",
+          "actual": null
+        },
+        {
+          "field": "currency",
+          "expected": "USD",
+          "actual": null
+        },
+        {
+          "field": "subtotal",
+          "expected": "100.00",
+          "actual": null
+        },
+        {
+          "field": "tax",
+          "expected": "5.00",
+          "actual": null
+        },
+        {
+          "field": "total",
+          "expected": "105.00",
+          "actual": null
+        },
+        {
+          "field": "description",
+          "expected": "Synthetic office supplies",
+          "actual": null
+        }
+      ],
+      "unresolved_detection": {
+        "true_positive": 0,
+        "false_positive": 9,
+        "false_negative": 0,
+        "true_negative": 0
+      },
+      "outcomes_match": false,
+      "quality_passed": false,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "needs_review",
+        "validation_status": "invalid",
+        "validation_errors": [
+          "missing:vendor_name",
+          "missing:invoice_number",
+          "missing:currency",
+          "missing:description",
+          "missing:invoice_date",
+          "missing:due_date",
+          "missing:subtotal",
+          "missing:tax",
+          "missing:total"
+        ],
+        "attention_required": true,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "excess_decimal_precision",
+      "known_limitation": false,
+      "known_field_count": 9,
+      "correct_field_count": 9,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 9
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "extracted",
+        "validation_status": "invalid",
+        "validation_errors": [
+          "invalid:subtotal",
+          "invalid:total"
+        ],
+        "attention_required": true,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "unsupported_currency",
+      "known_limitation": false,
+      "known_field_count": 9,
+      "correct_field_count": 9,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 9
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "extracted",
+        "validation_status": "invalid",
+        "validation_errors": [
+          "unsupported:currency"
+        ],
+        "attention_required": true,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "zero_amounts",
+      "known_limitation": false,
+      "known_field_count": 9,
+      "correct_field_count": 9,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 9
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "extracted",
+        "validation_status": "valid",
+        "validation_errors": [],
+        "attention_required": false,
+        "human_decision": "pending"
+      }
+    },
+    {
+      "id": "embedded_instructions",
+      "known_limitation": false,
+      "known_field_count": 9,
+      "correct_field_count": 9,
+      "field_mismatches": [],
+      "unresolved_detection": {
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 9
+      },
+      "outcomes_match": true,
+      "quality_passed": true,
+      "integrity": {
+        "human_decision_pending": true,
+        "processing_awaits_review": true,
+        "all_stages_visited": true,
+        "truth_unresolved_not_invented": true,
+        "flagged_fields_not_filled": true,
+        "null_fields_explicitly_flagged": true,
+        "unresolved_visible_in_summary": true,
+        "validation_errors_visible_in_summary": true,
+        "workflow_failures_visible_in_summary": true,
+        "extraction_mistakes_trigger_attention": true,
+        "problem_outputs_have_review_flags": true
+      },
+      "integrity_passed": true,
+      "execution_failed": false,
+      "observed": {
+        "extraction_status": "extracted",
+        "validation_status": "valid",
+        "validation_errors": [],
+        "attention_required": false,
+        "human_decision": "pending"
+      }
+    }
+  ]
+}

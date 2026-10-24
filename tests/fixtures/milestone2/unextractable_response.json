@@ -1,0 +1,16 @@
+{
+  "status": "completed",
+  "output": [
+    {
+      "type": "message",
+      "role": "assistant",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "text": "{\"fields\": {\"vendor_name\": null, \"invoice_number\": null, \"invoice_date\": null, \"due_date\": null, \"currency\": null, \"subtotal\": null, \"tax\": null, \"total\": null, \"description\": null}, \"uncertain_fields\": [], \"evidence\": {\"vendor_name\": [], \"invoice_number\": [], \"invoice_date\": [], \"due_date\": [], \"currency\": [], \"subtotal\": [], \"tax\": [], \"total\": [], \"description\": []}}"
+        }
+      ]
+    }
+  ]
+}

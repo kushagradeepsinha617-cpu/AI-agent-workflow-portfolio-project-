@@ -1,0 +1,10 @@
+SYNTHETIC INVOICE — demonstration only
+Vendor: Demo Supplies
+Invoice number: DEMO-002
+Invoice date: 2026-10-01
+Due date: 2026-10-31
+Currency: USD
+Subtotal: 100.00
+Tax: 5.00
+Total: 105.00
+Description: Synthetic office supplies

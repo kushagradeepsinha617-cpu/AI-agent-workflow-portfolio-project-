@@ -1,0 +1,35 @@
+[
+  {
+    "vendor_name": "Demo Supplies",
+    "invoice_number": "DEMO-001",
+    "invoice_date": "2026-10-01",
+    "due_date": "2026-10-31",
+    "currency": "USD",
+    "subtotal": "100.00",
+    "tax": "5.00",
+    "total": "105.00",
+    "description": "Synthetic office supplies"
+  },
+  {
+    "vendor_name": "Demo Supplies",
+    "invoice_number": null,
+    "invoice_date": "2026-10-01",
+    "due_date": "2026-10-31",
+    "currency": "USD",
+    "subtotal": "100.00",
+    "tax": "5.00",
+    "total": "110.00",
+    "description": "Synthetic office supplies"
+  },
+  {
+    "vendor_name": "Demo Supplies",
+    "invoice_number": "DEMO-001",
+    "invoice_date": "2026-10-01",
+    "due_date": "2026-10-31",
+    "currency": "USD",
+    "subtotal": "100.00",
+    "tax": "5.00",
+    "total": "105.00",
+    "description": "Synthetic office supplies"
+  }
+]
