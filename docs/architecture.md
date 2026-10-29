@@ -58,10 +58,15 @@ Adding separate validation or risk LLM agents would duplicate existing rules.
 
 ## Human control and failure behavior
 
-The current application prepares records for review. It does not implement the
-human approval interface yet. Every processed record has `human_decision: pending`
+The CLI and local mock-only workbench prepare records for review. The workbench
+displays existing pipeline output and evidence, without approval actions or
+persistence. Every processed record has `human_decision: pending`
 and `processing_status: awaiting_review`, including valid and failed records.
 Neither CLI mode exposes a decision-changing or payment operation.
+
+The viewer's serial loopback HTTP server invokes the same `process_invoice`
+function in mock mode. Request parsing and display are separate from extraction
+and validation. See [workbench boundaries](workbench.md).
 
 | Situation | Result |
 |---|---|

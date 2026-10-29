@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invoice review · AI Operations Agent</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">AO</span><span>AI Operations Agent</span></div>
+    <span class="pill neutral">Offline mock</span>
+  </header>
+  <main class="shell">
+    <section class="intro">
+      <p class="eyebrow">PENDING REVIEW WORKBENCH</p>
+      <h1>Inspect the invoice.<br>Follow the evidence.</h1>
+      <p>Process synthetic text, inspect the extracted fields, and see what needs attention.
+        Every record remains pending a human decision.</p>
+      <div class="notice">Synthetic data only · No model calls · Records are not saved</div>
+    </section>
+    <div class="workspace">
+      <section class="card source-card" aria-labelledby="source-heading">
+        <div class="card-heading"><h2 id="source-heading">Invoice source</h2><span class="step">01</span></div>
+        <form id="invoice-form">
+          <label for="example">Start with a synthetic example</label>
+          <select id="example"><option value="">Choose an example…</option></select>
+          <div class="source-label"><label for="document">Invoice text</label><label class="file-label" for="text-file">Load .txt file</label></div>
+          <input id="text-file" type="file" accept=".txt,text/plain">
+          <textarea id="document" rows="15" required spellcheck="false" placeholder="Paste synthetic invoice text here."></textarea>
+          <p class="hint">UTF-8 plain text only. PDF and scanned-image reading are not supported.</p>
+          <details id="context-options">
+            <summary>Email context and vendor list</summary>
+            <label for="email">Email context <span class="optional">optional</span></label>
+            <textarea id="email" rows="4" spellcheck="false" placeholder="Additional synthetic email text"></textarea>
+            <label for="known-vendors">Known vendors <span class="optional">one per line</span></label>
+            <textarea id="known-vendors" rows="2" spellcheck="false">Demo Supplies</textarea>
+          </details>
+          <button id="process" type="submit">Process invoice <span aria-hidden="true">→</span></button>
+          <p class="hint">The whole request must fit within 256,000 bytes. Duplicate history is limited to this submission.</p>
+        </form>
+      </section>
+      <section class="review-area" aria-labelledby="review-heading">
+        <div class="review-title"><h2 id="review-heading">Review record</h2><span class="pill pending">Human decision: pending</span></div>
+        <p id="message" class="message" role="status" aria-live="polite">Load an example or paste text, then process the invoice.</p>
+        <div id="placeholder" class="card empty-state">
+          <span class="empty-icon" aria-hidden="true">↳</span>
+          <h3>Your evidence starts here</h3>
+          <p>The result will show fields, source citations, validation checks, and unresolved information together.</p>
+        </div>
+        <div id="result" hidden>
+          <div class="status-grid">
+            <div class="status-card"><span>Extraction</span><strong id="extraction-status"></strong></div>
+            <div class="status-card"><span>Validation</span><strong id="validation-status"></strong></div>
+            <div class="status-card"><span>Decision</span><strong class="pending-text">Pending review</strong></div>
+          </div>
+          <section class="card" aria-labelledby="fields-heading">
+            <div class="card-heading"><h3 id="fields-heading">Extracted fields</h3><span class="step">02</span></div>
+            <div class="table-scroll"><table><thead><tr><th>Field</th><th>Value</th><th>Review note</th></tr></thead><tbody id="fields"></tbody></table></div>
+          </section>
+          <section class="card" aria-labelledby="issues-heading">
+            <div class="card-heading"><h3 id="issues-heading">Checks &amp; attention</h3><span class="step">03</span></div>
+            <div id="issues"></div>
+          </section>
+          <details class="card evidence-card">
+            <summary>Source evidence</summary>
+            <p class="hint">Original value tokens with their document or email line numbers.</p>
+            <ul id="evidence" class="evidence-list"></ul>
+          </details>
+          <details class="card">
+            <summary>Review summary</summary>
+            <pre id="review-summary"></pre>
+          </details>
+          <p class="footnote">This viewer prepares records for inspection. It has no approval, rejection, payment, or sending controls.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="shell footer">AI-assisted reading. Deterministic checks. Human decisions.</footer>
+</body>
+</html>

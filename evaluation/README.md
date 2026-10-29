@@ -12,8 +12,9 @@ After installing the locked dependencies from the project README:
 .venv/bin/python -m operations_agent.evaluation --output evaluation/mock_report.json --log-json local-data/evaluation.jsonl
 ```
 
-The full suite passed **98 tests** (79 prior tests plus 19 evaluation/observability
-tests). The evaluation command currently exits **1**, intentionally: one known
+At the Milestone 4 checkpoint, the full suite passed **98 tests** (79 prior tests
+plus 19 evaluation/observability tests). The current README also reports later
+workbench tests. The evaluation command currently exits **1**, intentionally: one known
 mock-parser limitation fails the quality checks. The report is still written.
 Exit 0 means all case quality and integrity checks passed; exit 1 means measured
 failures; exit 2 means input/output or argument errors. No evaluation case is

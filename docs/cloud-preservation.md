@@ -34,7 +34,8 @@ document or by the application's test results.
    command from the README when verifying the restored development workflow.
 
 If restoration has not been verified, keep it recorded as unverified. No service
-process needs to survive publication for this CLI project. Provider credentials
+process needs to survive publication for the CLI. If using the optional workbench,
+restart it with the command in [its guide](workbench.md). Provider credentials
 remain separate environment configuration and are unnecessary for these checks.
 
 If only the GitHub source is available, select the pushed project branch and

@@ -6,9 +6,10 @@ Vendor invoices contain facts that must be extracted, checked and reviewed befor
 a business records them. Document interpretation can be uncertain, while rules
 such as arithmetic and required fields should be repeatable.
 
-This project implements a CLI workflow over synthetic text: extraction, structured
+This project implements a workflow over synthetic text: extraction, structured
 handoffs, deterministic validation, bounded CrewAI review preparation, evaluation
-and sanitized stage logging. It deliberately stops before approval, email sending
+and sanitized stage logging. A CLI and a mock-only pending-review workbench expose
+the same pipeline. It deliberately stops before approval, email sending
 and financial actions. Implementation was AI-assisted; the evidence consists of
 reproducible tests, fixtures and evaluation artifacts rather than a claim that
 generated code is automatically correct.
@@ -40,10 +41,12 @@ them separately instead of presenting one general-purpose "AI accuracy" score.
 
 ## Evidence
 
-The checkpoint passed **98 automated tests**. Tests exercise real CrewAI scheduling
+The current suite passed **115 automated tests**: the original 98 plus 17
+loopback HTTP workbench tests. Tests exercise real CrewAI scheduling
 and task execution with fake model replies, plus mocked OpenAI responses. They
 cover malformed input, numeric boundaries, component failure and the human-review
-boundary. No paid calls or live-model accuracy tests occurred.
+boundary. Browser appearance and full interactive behavior remain unverified.
+No paid calls or live-model accuracy tests occurred.
 
 The independent synthetic annotations cover 17 cases and 153 field positions.
 Of these, 140 fields have known values; mock extraction recovered 131 exactly

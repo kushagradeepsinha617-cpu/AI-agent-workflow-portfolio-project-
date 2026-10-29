@@ -5,14 +5,15 @@ reviewable records**. It preserves source evidence, flags missing or conflicting
 information, and keeps every record pending human review.
 
 The project demonstrates deterministic validation, optional AI extraction,
-CrewAI orchestration, offline evaluation and structured logging. It currently
-runs through a CLI; there is no approval UI, email sending or payment execution.
+CrewAI orchestration, offline evaluation and structured logging. A CLI and a
+local mock-only review workbench expose the same processing pipeline. There is
+no decision-changing approval UI, email sending or payment execution.
 
 ## Evidence at this checkpoint
 
 | Measurement | Observed result |
 |---|---:|
-| Automated tests | 98 passed |
+| Automated tests | 115 passed |
 | Mock recovery of known fields | 131 / 140 — 93.57% |
 | Cases passing every quality check | 16 / 17 |
 | Cases passing every workflow-integrity check | 17 / 17 |
@@ -52,7 +53,8 @@ handoff rather than independent financial reasoning.
 
 [Architecture and trade-offs](docs/architecture.md) ·
 [Technical case study](docs/case-study.md) ·
-[Implementation and AI configuration](docs/implementation.md)
+[Implementation and AI configuration](docs/implementation.md) ·
+[Pending-review workbench](docs/workbench.md)
 
 ## Quick start
 
@@ -82,6 +84,18 @@ summary and `human_decision: "pending"`. Exit 0 means the processing checks pass
 not approval. Exit 1 signals extraction/validation/workflow issues; exit 2 signals
 invalid arguments or input. Baseline processing without CrewAI remains available
 by omitting `--orchestrate`; see the implementation reference.
+
+For the local pending-review interface:
+
+```sh
+.venv/bin/python -m operations_agent.workbench --port 8765
+```
+
+It accepts synthetic text or `.txt` files and displays evidence, unresolved fields,
+validation checks and the pending summary. It has no paid-model or approval
+controls and does not save records. It binds only to loopback and requires a
+browser on the same host; no cloud preview/public hosting is configured.
+[Usage, transport limits and verification scope](docs/workbench.md).
 
 ## Reproduce the demo and evaluation
 
@@ -119,7 +133,9 @@ loaded. The review agent remains a stub in both CLI modes.
 - Duplicate history lasts for one validator instance. Currency support is limited
   to USD/EUR/GBP/INR; money supports nonnegative values up to one trillion and two
   stored decimal places. Credit notes and currency-specific precision are future work.
-- There is no approval UI, persistent application storage or approved export.
+- The workbench only displays pending records; there is no human-approval action,
+  persistent application storage or approved export. Browser appearance and full
+  interactive behavior have not been visually verified yet.
 - The CrewAI adapter is version-pinned and includes a documented private-path
   compatibility override. The synchronous wrapper changes process-wide settings;
   it is intended for serial CLI use, not a concurrent server.
@@ -132,11 +148,12 @@ loaded. The review agent remains a stub in both CLI modes.
 | Mock and AI extraction | [extraction.py](operations_agent/extraction.py), [ai_extraction.py](operations_agent/ai_extraction.py) |
 | CrewAI Flow and bounded review task | [orchestration.py](operations_agent/orchestration.py) |
 | Sanitized stage logging | [observability.py](operations_agent/observability.py) |
+| Mock-only pending-review workbench | [workbench.py](operations_agent/workbench.py), [web/](operations_agent/web/) |
 | Scoring and ground truth | [evaluation.py](operations_agent/evaluation.py), [dataset.json](evaluation/dataset.json) |
 | Regression tests and fixtures | [tests/](tests/) |
 
 Next work should validate a configured live extractor on broader independent
-synthetic data, then add explicit human review and approved exports. More agents
+synthetic data, then add explicit human decisions and approved exports. More agents
 are not needed to explain or demonstrate the current engineering decisions.
 
 Cloud publication and restoration are separate from these software checks.

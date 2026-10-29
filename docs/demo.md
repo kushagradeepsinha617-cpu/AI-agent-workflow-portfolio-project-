@@ -54,7 +54,8 @@ For the complete software checks, run separately:
 .venv/bin/python -m unittest discover -s tests -v
 ```
 
-The verified checkpoint has 98 passing tests. The independent evaluation method
+The complete suite now has 115 passing tests, including the pending-workbench
+HTTP tests; the CLI demo's measured evaluation checkpoint is unchanged. The independent evaluation method
 and its limitations are [documented here](../evaluation/README.md).
 
 ## Short recording outline

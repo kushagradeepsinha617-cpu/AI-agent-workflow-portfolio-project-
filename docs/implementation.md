@@ -1,5 +1,9 @@
 # Implementation reference
 
+This page preserves the original CLI milestones and their historical test
+checkpoints. The later [pending-review workbench](workbench.md) reuses that
+pipeline; see the repository README for the latest complete test count.
+
 An incremental application for **synthetic data only**. Mock or opt-in OpenAI
 extraction feeds an unchanged deterministic validator. Milestone 3 adds an
 optional CrewAI Flow and bounded review agent. The original baseline commands
