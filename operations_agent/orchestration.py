@@ -58,7 +58,7 @@ def checked_extraction(result):
         raise ValueError('Malformed extraction handoff')
     if any(value is not None and not isinstance(value, str) for value in result.fields.values()):
         raise ValueError('Malformed extraction values')
-    if result.status not in ('extracted', 'needs_review', 'failed'):
+    if result.mode not in ('mock', 'ai') or result.status not in ('extracted', 'needs_review', 'failed'):
         raise ValueError('Unknown extraction status')
     if (not isinstance(result.missing_fields, list) or not isinstance(result.conflicts, dict)
             or not isinstance(result.uncertain_fields, dict) or not isinstance(result.issues, list)
@@ -67,13 +67,23 @@ def checked_extraction(result):
     unresolved = set(result.missing_fields) | set(result.conflicts) | set(result.uncertain_fields)
     if not unresolved <= set(FIELDS) or any(result.fields[name] is not None for name in unresolved):
         raise ValueError('Unresolved extraction value was filled')
+    if any(value is None and name not in unresolved for name, value in result.fields.items()):
+        raise ValueError('Null extraction value has no review metadata')
     if result.status == 'extracted' and (unresolved or result.issues):
         raise ValueError('Extraction status contradicts review metadata')
     if any(not isinstance(issue, str) for issue in result.issues):
         raise ValueError('Malformed extraction issues')
-    for values in result.evidence.values():
+    if any(not isinstance(reason, str) or not reason.strip()
+           for reason in result.uncertain_fields.values()):
+        raise ValueError('Malformed uncertainty reason')
+    for values in [*result.evidence.values(), *result.conflicts.values()]:
         if not isinstance(values, list) or any(not isinstance(item, Evidence) for item in values):
             raise ValueError('Malformed evidence')
+        for item in values:
+            if (not isinstance(item.source, str) or item.source not in ('document', 'email')
+                    or type(item.line) is not int or item.line < 1
+                    or not isinstance(item.value, str) or not item.value.strip()):
+                raise ValueError('Malformed evidence members')
     return deepcopy(result)
 
 

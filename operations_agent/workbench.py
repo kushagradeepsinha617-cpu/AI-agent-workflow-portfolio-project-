@@ -45,6 +45,46 @@ def checked_request(payload):
     return document, email, [v.strip() for v in vendors]
 
 
+def checked_output(output):
+    """Check the browser's response contract, without repeating invoice rules."""
+    if (not isinstance(output, dict) or output.get('human_decision') != 'pending'
+            or output.get('processing_status') != 'awaiting_review'
+            or output.get('validation_status') not in ('valid', 'invalid', 'unavailable')
+            or not isinstance(output.get('review_summary'), str)):
+        raise ValueError('Malformed pipeline output')
+    extraction, workflow = output.get('extraction'), output.get('workflow')
+    if not isinstance(extraction, dict) or not isinstance(workflow, dict):
+        raise ValueError('Missing pipeline metadata')
+    for items in (output.get('errors'), output.get('risk_indicators'),
+                  extraction.get('issues'), extraction.get('missing_fields'),
+                  workflow.get('issues'), workflow.get('completed_steps')):
+        if not isinstance(items, list) or any(not isinstance(item, str) for item in items):
+            raise ValueError('Malformed pipeline lists')
+    fields, evidence = extraction.get('fields'), extraction.get('evidence')
+    if (not isinstance(fields, dict) or set(fields) != set(FIELDS)
+            or any(value is not None and not isinstance(value, str) for value in fields.values())
+            or not isinstance(evidence, dict) or set(evidence) != set(FIELDS)
+            or not isinstance(extraction.get('conflicts'), dict)
+            or not isinstance(extraction.get('uncertain_fields'), dict)
+            or extraction.get('status') not in ('extracted', 'needs_review', 'failed')):
+        raise ValueError('Malformed extraction metadata')
+    for items in evidence.values():
+        if not isinstance(items, list):
+            raise ValueError('Malformed evidence list')
+        for item in items:
+            if (not isinstance(item, dict) or not isinstance(item.get('source'), str)
+                    or item['source'] not in ('document', 'email')
+                    or type(item.get('line')) is not int or item['line'] < 1
+                    or not isinstance(item.get('value'), str)):
+                raise ValueError('Malformed evidence item')
+    unresolved = (set(extraction['missing_fields']) | set(extraction['conflicts'])
+                  | set(extraction['uncertain_fields']))
+    if (not unresolved <= set(FIELDS) or any(fields[name] is not None for name in unresolved)
+            or any(value is None and name not in unresolved for name, value in fields.items())
+            or extraction['status'] == 'extracted' and (unresolved or extraction['issues'])):
+        raise ValueError('Contradictory extraction metadata')
+
+
 class WorkbenchHandler(BaseHTTPRequestHandler):
     server_version = 'InvoiceWorkbench'
     sys_version = ''
@@ -139,12 +179,7 @@ class WorkbenchHandler(BaseHTTPRequestHandler):
             return
         try:
             output = self.server.processor(document, email, mode='mock', known_vendors=vendors)
-            if (not isinstance(output, dict) or output.get('human_decision') != 'pending'
-                    or output.get('processing_status') != 'awaiting_review'
-                    or output.get('validation_status') not in ('valid', 'invalid', 'unavailable')
-                    or not isinstance(output.get('extraction'), dict)
-                    or set(output['extraction'].get('fields', {})) != set(FIELDS)):
-                raise ValueError('Malformed pipeline output')
+            checked_output(output)
             self.reply(200, output)
         except Exception:
             self.error(500, 'processing_failed', 'Processing failed. No approval or financial action occurred.')

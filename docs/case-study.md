@@ -41,8 +41,9 @@ them separately instead of presenting one general-purpose "AI accuracy" score.
 
 ## Evidence
 
-The current suite passed **115 automated tests**: the original 98 plus 17
-loopback HTTP workbench tests. Tests exercise real CrewAI scheduling
+The current suite passed **120 automated tests** on Linux: the original 98, 17
+initial loopback HTTP tests, and five subsequent audit regression tests.
+Tests exercise real CrewAI scheduling
 and task execution with fake model replies, plus mocked OpenAI responses. They
 cover malformed input, numeric boundaries, component failure and the human-review
 boundary. Browser appearance and full interactive behavior remain unverified.

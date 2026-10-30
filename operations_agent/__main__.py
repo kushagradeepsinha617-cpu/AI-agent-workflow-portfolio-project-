@@ -10,6 +10,7 @@ from .extraction import extract_mock
 from .ai_extraction import extract_ai
 from .json_input import load_json
 from .observability import JsonlEventLog
+from .file_safety import same_file
 
 
 def encode(value):
@@ -41,6 +42,9 @@ def main():
     if args.log_json and not args.orchestrate:
         parser.error('--log-json requires --orchestrate')
     try:
+        if args.log_json and any(same_file(args.log_json, source)
+                                 for source in (args.input, args.email) if source is not None):
+            parser.error('--log-json must use a different file from the invoice and email inputs')
         if args.orchestrate:
             try:
                 from .orchestration import process_invoice

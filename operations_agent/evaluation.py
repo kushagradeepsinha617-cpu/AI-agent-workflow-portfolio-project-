@@ -10,6 +10,7 @@ from .extraction import FIELDS
 from .json_input import load_json
 from .observability import JsonlEventLog
 from .validation import Validator
+from .file_safety import require_distinct_files
 
 
 DEFAULT_DATASET = Path(__file__).resolve().parents[1] / 'evaluation/dataset.json'
@@ -190,10 +191,8 @@ def main():
     parser.add_argument('--output', type=Path)
     parser.add_argument('--log-json', type=Path)
     args = parser.parse_args()
-    paths = [p.resolve() for p in (args.dataset, args.output, args.log_json) if p is not None]
-    if len(set(paths)) != len(paths):
-        parser.error('Dataset, output and log must use different files')
     try:
+        require_distinct_files([p for p in (args.dataset, args.output, args.log_json) if p is not None])
         dataset, fingerprint = load_dataset(args.dataset)
         with JsonlEventLog(args.log_json) if args.log_json else nullcontext() as sink:
             report = evaluate(dataset, fingerprint, event_sink=sink)

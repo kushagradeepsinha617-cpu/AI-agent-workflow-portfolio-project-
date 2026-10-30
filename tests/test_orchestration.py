@@ -12,7 +12,7 @@ import unittest
 from unittest.mock import Mock, patch
 
 from operations_agent.__main__ import main
-from operations_agent.extraction import extract_mock
+from operations_agent.extraction import Evidence, extract_mock
 from operations_agent.orchestration import (
     InvoiceState, ReviewPlanStub, process_invoice, review_findings,
 )
@@ -124,6 +124,33 @@ class OrchestrationTests(unittest.TestCase):
         self.assertIn('validation_task_failed', result['workflow']['issues'])
         self.assertEqual(result['extraction']['fields']['invoice_number'], 'SYN-101')
         self.assertIn('Validation: unavailable', result['review_summary'])
+
+    def test_null_without_review_metadata_is_rejected(self):
+        bad = extract_mock(TEXT)
+        bad.fields['total'] = None
+        result = self.run_flow(extractor=Mock(return_value=bad))
+        self.assertIn('extraction_task_failed', result['workflow']['issues'])
+        self.assertEqual(result['extraction']['status'], 'failed')
+
+    def test_invalid_evidence_and_metadata_are_controlled_extraction_failures(self):
+        for evidence in (Evidence([], 1, '105.00'), Evidence('document', True, '105.00'),
+                         Evidence('document', 0, '105.00'), Evidence('document', 1, {'bad': object()})):
+            with self.subTest(evidence=evidence):
+                bad = extract_mock(TEXT)
+                bad.evidence['total'] = [evidence]
+                result = self.run_flow(extractor=Mock(return_value=bad))
+                self.assertIn('extraction_task_failed', result['workflow']['issues'])
+                self.assertEqual(result['extraction']['status'], 'failed')
+        for category in ('uncertain_fields', 'conflicts'):
+            for value in (object(), '', [object()]):
+                with self.subTest(category=category, value=type(value).__name__):
+                    bad = extract_mock(TEXT)
+                    bad.status = 'needs_review'
+                    bad.fields['total'] = None
+                    getattr(bad, category)['total'] = value
+                    result = self.run_flow(extractor=Mock(return_value=bad))
+                    self.assertIn('extraction_task_failed', result['workflow']['issues'])
+                    self.assertEqual(result['extraction']['status'], 'failed')
 
     def test_malformed_or_approving_validation_handoff_is_blocked(self):
         approving = Validator().validate(extract_mock(TEXT).fields)

@@ -228,6 +228,21 @@ class WorkbenchTests(unittest.TestCase):
             with self.subTest(bad_port=bad_port), self.assertRaises(ValueError):
                 make_server(bad_port)
 
+    def test_incomplete_pipeline_metadata_is_not_a_success_response(self):
+        _, _, valid = self.process((ROOT / 'samples/invoice.txt').read_text())
+        for section, key, value in (('extraction', 'evidence', None),
+                                    ('extraction', 'uncertain_fields', []),
+                                    ('workflow', 'issues', None),
+                                    (None, 'review_summary', {}),
+                                    (None, 'errors', 'not a list')):
+            reply = deepcopy(valid)
+            target = reply[section] if section else reply
+            target[key] = value
+            with self.subTest(section=section, key=key), patch.object(self.server, 'processor', return_value=reply):
+                status, _, result = self.process('Synthetic invoice')
+                self.assertEqual(status, 500)
+                self.assertEqual(result['human_decision'], 'pending')
+
     def test_request_validation_preserves_input_and_zero_source_values(self):
         raw = {'document': 'Total: 0.00', 'email': '', 'known_vendors': [' Demo Supplies ']}
         before = deepcopy(raw)

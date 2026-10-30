@@ -54,7 +54,7 @@ For the complete software checks, run separately:
 .venv/bin/python -m unittest discover -s tests -v
 ```
 
-The complete suite now has 115 passing tests, including the pending-workbench
+The complete suite now has 120 passing tests on Linux, including the pending-workbench
 HTTP tests; the CLI demo's measured evaluation checkpoint is unchanged. The independent evaluation method
 and its limitations are [documented here](../evaluation/README.md).
 

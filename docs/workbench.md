@@ -75,8 +75,9 @@ cover successful processing, unresolved fields, source conflicts, wrong totals,
 request limits, malformed/duplicate JSON, foreign hosts/origins, disallowed paths,
 attempted AI/decision overrides, and failed/nonpending processor responses.
 
-The targeted HTTP suite passed **17 tests**; the full suite passed **115 tests**
-(the original 98 plus those 17). JavaScript syntax checking passed. The documented
+The targeted HTTP suite now has **18 tests**; the full suite passed **120 tests**
+on Linux, including five regression tests added in the full audit. The workbench
+release originally had 17 HTTP tests and 115 total tests. JavaScript syntax checking passed. The documented
 startup command was also exercised in its own process: assets/examples returned
 HTTP 200, an incorrect total reached validation, and the service stopped cleanly.
 Those checks do not establish visual rendering or complete browser interaction.

@@ -35,7 +35,8 @@ tools/provider extras are requested. CrewAI itself pulls a substantial dependenc
 graph, including database libraries; the application does not instantiate a
 database. A test blocks SQLite connections during import and processing.
 Initial package installation needs package-registry access. Subsequent mock
-workflow runs and tests need no network or API credentials.
+workflow runs and tests need no external network or API credentials. Workbench
+HTTP tests use local loopback sockets.
 
 ## Run
 
@@ -310,7 +311,9 @@ the current official repository documentation, public API definitions and instal
 
 ## Limits and next milestones
 
-The current complete suite passes **98 tests**. Reproduce the mock evaluation:
+The current complete suite passes **120 tests** on Linux. The original Milestone 4
+checkpoint had 98 tests; workbench and subsequent audit tests extend it. Reproduce
+the mock evaluation:
 
 ```sh
 .venv/bin/python -m operations_agent.evaluation --output evaluation/mock_report.json

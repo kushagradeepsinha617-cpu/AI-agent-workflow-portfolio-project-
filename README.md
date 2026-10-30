@@ -13,7 +13,7 @@ no decision-changing approval UI, email sending or payment execution.
 
 | Measurement | Observed result |
 |---|---:|
-| Automated tests | 115 passed |
+| Automated tests | 120 passed on Linux |
 | Mock recovery of known fields | 131 / 140 — 93.57% |
 | Cases passing every quality check | 16 / 17 |
 | Cases passing every workflow-integrity check | 17 / 17 |
@@ -56,6 +56,8 @@ handoff rather than independent financial reasoning.
 [Implementation and AI configuration](docs/implementation.md) ·
 [Pending-review workbench](docs/workbench.md)
 
+[Full audit: fixes, verification and remaining limits](docs/audit.md).
+
 ## Quick start
 
 Tested on Linux with Python 3.12 and CrewAI 1.15.30. Use Python >=3.12,<3.14.
@@ -73,7 +75,8 @@ platform-specific dependency markers. For example, `uvloop` is excluded on Windo
 while Windows-only dependencies are included there. CrewAI brings a substantial
 set of dependencies; no optional tool/provider extras are requested. Installation
 needs package-registry access. The mock workflow, demo and tests run afterward
-without API keys, paid calls, network access or a database.
+without API keys, paid calls, external network access or a database. Workbench
+HTTP tests use local loopback sockets.
 
 ### Windows PowerShell
 
