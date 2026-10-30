@@ -27,7 +27,10 @@ uv pip check --python .venv/bin/python
 ```
 
 `requirements.in` declares CrewAI 1.15.30. `requirements.lock` pins its resolved
-dependencies and artifact hashes, generated for Linux/Python 3.12. No optional
+dependencies and artifact hashes, generated with a universal Python 3.12
+resolution that preserves platform markers (including excluding `uvloop` on
+Windows). See the README for PowerShell commands. Linux is runtime-tested;
+Windows dependency resolution has been checked without a native Windows run. No optional
 tools/provider extras are requested. CrewAI itself pulls a substantial dependency
 graph, including database libraries; the application does not instantiate a
 database. A test blocks SQLite connections during import and processing.

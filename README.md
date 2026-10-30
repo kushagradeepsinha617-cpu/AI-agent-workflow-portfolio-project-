@@ -68,10 +68,37 @@ uv pip check --python .venv/bin/python
 .venv/bin/python -m unittest discover -s tests -v
 ```
 
-The hashed lockfile was resolved for Linux/Python 3.12. CrewAI brings a substantial
+The hashed lockfile uses a universal resolution targeting Python 3.12, preserving
+platform-specific dependency markers. For example, `uvloop` is excluded on Windows,
+while Windows-only dependencies are included there. CrewAI brings a substantial
 set of dependencies; no optional tool/provider extras are requested. Installation
 needs package-registry access. The mock workflow, demo and tests run afterward
 without API keys, paid calls, network access or a database.
+
+### Windows PowerShell
+
+From the cloned repository folder, run each command separately:
+
+```powershell
+uv venv --python 3.12
+uv pip sync --python .venv\Scripts\python.exe --require-hashes requirements.lock
+uv pip check --python .venv\Scripts\python.exe
+& ".\.venv\Scripts\python.exe" -m operations_agent.workbench --port 8765
+```
+
+Open `http://127.0.0.1:8765` in a browser on that same Windows machine. Keep
+PowerShell open and stop the server with Ctrl+C. A cloud server's loopback address
+is not accessible from your laptop without separately configured forwarding.
+If installation tries to build `uvloop` on Windows, update your checkout with
+`git pull --ff-only` and retry the sync with the corrected lockfile. Do not remove
+hash checking. Windows dependency resolution is checked from Linux; native Windows
+installation and runtime testing have not yet been verified.
+
+Regenerate the lockfile while retaining platform markers with:
+
+```sh
+uv pip compile requirements.in --python-version 3.12 --universal --generate-hashes --output-file requirements.lock
+```
 
 Run one invoice:
 
