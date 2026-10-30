@@ -24,6 +24,14 @@ platform requires MP4, convert it with your video editor. Chromium must first be
 installed using the command below; your earlier successful install can be reused.
 Partial videos after a failure are not labelled `workflow.webm`.
 
+If an older runner completed all five examples but failed with
+`Video.save_as: Target page, context or browser has been closed`, the PNGs
+are already saved. Check the newest output folder for the original randomly named
+`.webm`; context closure may have saved that video successfully before the naming
+step failed. Open and review it before deciding whether to record again. Update
+with `git pull --ff-only` to get the corrected export order: context closes to
+flush frames, video saves, then browser closes.
+
 ## Screenshots only
 
 This optional runner operates on the same machine as the running workbench.

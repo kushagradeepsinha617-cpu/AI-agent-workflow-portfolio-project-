@@ -137,16 +137,20 @@ def main():
                 page.screenshot(path=str(output / name), full_page=True)
                 captures.append(name)
                 print(f'{case}: source and result captured; decision pending')
+            if args.record:
+                # Flush frames by closing the context, but keep the browser's
+                # artifact connection alive until save_as/path have completed.
+                video = page.video
+                context.close()
+                context = None
+                video.save_as(str(output / 'workflow.webm'))
+                original = Path(video.path())
+                if original != output / 'workflow.webm':
+                    original.unlink()
         finally:
             if context is not None:
                 context.close()  # Flush the video even if a later assertion fails.
             browser.close()
-        if args.record:
-            # Only label a video as complete after every assertion and screenshot succeeds.
-            page.video.save_as(str(output / 'workflow.webm'))
-            original = Path(page.video.path())
-            if original != output / 'workflow.webm':
-                original.unlink()
     (output / 'README.txt').write_text(
         'Actual browser captures of the synthetic mock workbench. No live model used.\n'
         + '\n'.join(captures) + '\n', encoding='utf-8')
